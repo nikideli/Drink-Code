@@ -1,4 +1,5 @@
 ﻿@model Project.Models.ArticleViewModel
+ 
 
 @{
     ViewBag.Title = "Edit";
@@ -26,6 +27,13 @@
                 @Html.LabelFor(m => m.Content, new { @class = "control-label col-sm-4" })
                 <div class="col-sm-4">
                     @Html.TextAreaFor(m => m.Content, new { @class = "form-control", @rows = "7" })
+                </div>
+            </div>
+            //Upload a photo
+            <div class="form-group">
+                @Html.LabelFor(m => m.imgURL, new { @class = "control-label col-sm-4" })
+                <div class="col-sm-4">
+                    @Html.TextBoxFor(m => m.imgURL, new { @class = "form-control", @rows = "7" })
                 </div>
             </div>
 

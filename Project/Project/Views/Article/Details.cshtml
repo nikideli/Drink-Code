@@ -20,9 +20,13 @@
         <div class="col-md-6">
             <img src="@Model.imgURL" class="img-responsive" />
             </div>
+        <div>
+            <a href="/Article/List?user=@Model.Author.UserName">See all recipies of this Author</a>
+            </div>
         <small class="author">
             --author @Model.Author.FullName
         </small>
+        
         <footer class="pull-right">
             @if (User.IsInRole("Admin") || Model.IsAuthor(User.Identity.Name))
             {

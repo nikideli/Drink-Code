@@ -18,5 +18,8 @@ namespace Project.Models
         public string Content { get; set; }
 
         public string AuthorId { get; set; }
+
+        [Url]
+        public string imgURL { get; set; }
     }
 }

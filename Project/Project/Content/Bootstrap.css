@@ -1131,7 +1131,7 @@ img {
 .img-responsiveKalin {
   display: block;
   width: 300px;
-  height: auto;
+  max-height: 450px;
 }
 .img-rounded {
   border-radius: 6px;

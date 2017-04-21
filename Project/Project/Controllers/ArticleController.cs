@@ -17,11 +17,23 @@ namespace Project.Controllers
             return RedirectToAction("List");
         }
 
-        public ActionResult List()
+        public ActionResult List(int page=1, string user=null)
         {
             using (var database = new ProjectDbContext())
             {
-                var articles = database.Articles.Include(a => a.Author).ToList();
+                var pageSize = 5;
+
+                var recipies = database.Articles.AsQueryable();
+
+                if (user != null)
+                {
+                    recipies = recipies.Where(r => r.Author.Email == user);
+                }
+
+                var articles = recipies.OrderBy(c=>c.Id).Skip((page-1)*5).Take(pageSize).Include(a => a.Author).ToList();
+
+                ViewBag.Currentpage = page;
+
                 return View(articles);
             }
                 
@@ -158,6 +170,7 @@ namespace Project.Controllers
                 model.Id = article.Id;
                 model.Title = article.Title;
                 model.Content = article.Content;
+                model.imgURL = article.imgURL;
 
                 return View(model);
             }
@@ -174,6 +187,7 @@ namespace Project.Controllers
 
                     article.Title = model.Title;
                     article.Content = model.Content;
+                    article.imgURL = model.imgURL;
 
                     database.Entry(article).State = EntityState.Modified;
                     database.SaveChanges();

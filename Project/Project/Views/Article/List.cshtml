@@ -6,27 +6,43 @@
 
 <div class="container">
     <div class="row">
+        <h2 class="text-center">Our Drinks - Page @ViewBag.CurrentPage</h2>
+        @if (!Model.Any())
+        {
+            <h2 class="text-center"> No more recipies. If you want to add more click @Html.ActionLink("here","Create","Article")</h2>
+        }
         @foreach (var article in Model)
         {
-            <div class="col-sm-6">
-                <article>
-                    <header>
-                        <h2>
-                            @Html.ActionLink(@article.Title, "Details", "Article", new { @id = article.Id }, null)
-                        </h2>
-                    </header>
-                    <img class="img-responsiveKalin" src="@article.imgURL"/>
+            <div class="row" style="padding-top:60px">
+                <div class="col-md-6">
+                    <img src="@article.imgURL" class="img-responsiveKalin"  />
+                </div>
+                <div class="col-md-6">
+                    <h2>
+                        @Html.ActionLink(@article.Title, "Details", "Article", new { @id = article.Id }, null)
+                    </h2>
                     <p>
-                       @article.Content.Substring(0, article.Content.Length/3)...
+                        @article.Content.Substring(0, article.Content.Length / 3)...
                     </p>
                     <footer class="pull-right">
                         <small class="author">
                             --author @article.Author.FullName
                         </small>
                     </footer>
-                </article>
+                </div>
             </div>
         }
     </div>
 </div>
 <hr />
+
+@{ 
+    var currentUserQuerry = Request.QueryString["user"];
+}
+
+<p class="text-center">
+    <a href="/Article/List?page=@(ViewBag.CurrentPage-1)@(currentUserQuerry!=null? "&user=" + currentUserQuerry : string
+         .Empty)" class="btn btn-primary @((ViewBag.CurrentPage==1) ? "disabled" : string.Empty)"><< Privious</a>
+    <a href="/Article/List?page=@(ViewBag.CurrentPage+1)@(currentUserQuerry!=null? "&user=" + currentUserQuerry : string
+         .Empty)" class="btn btn-primary @(!Model.Any() ? "disabled" : string.Empty)">Next >></a>
+</p>
