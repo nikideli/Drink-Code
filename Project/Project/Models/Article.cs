@@ -29,6 +29,8 @@ namespace Project.Models
             return this.Author.UserName.Equals(name);
         }
 
+        [Url]
+        public string imgURL { get; set; }
        
     }
 }

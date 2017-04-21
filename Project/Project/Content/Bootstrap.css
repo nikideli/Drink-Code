@@ -1128,6 +1128,11 @@ img {
   max-width: 100%;
   height: auto;
 }
+.img-responsiveKalin {
+  display: block;
+  width: 300px;
+  height: auto;
+}
 .img-rounded {
   border-radius: 6px;
 }

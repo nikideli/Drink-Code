@@ -15,8 +15,9 @@
                             @Html.ActionLink(@article.Title, "Details", "Article", new { @id = article.Id }, null)
                         </h2>
                     </header>
+                    <img class="img-responsiveKalin" src="@article.imgURL"/>
                     <p>
-                        @article.Content
+                       @article.Content.Substring(0, article.Content.Length/3)...
                     </p>
                     <footer class="pull-right">
                         <small class="author">
