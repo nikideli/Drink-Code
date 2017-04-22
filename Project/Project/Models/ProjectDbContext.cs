@@ -18,6 +18,8 @@ namespace Project.Models
 
         public virtual IDbSet<Article> Articles { get; set; }
 
+        
+
         public static ProjectDbContext Create()
         {
             return new ProjectDbContext();
