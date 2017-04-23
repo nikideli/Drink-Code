@@ -10,8 +10,10 @@
 
 <div class="container">
     <div class="row">
-        <h2 class="text-center">@(currentUserQuerry != null ? "Drinks by " + Model.First().Author.FullName : string
-         .Empty) - Page @ViewBag.CurrentPage </h2>
+        <h2 class="text-center">
+        @((currentUserQuerry != null && Model.Count !=0) ? "Drinks by " + Model.First().Author.FullName : string
+.Empty) -Page @ViewBag.CurrentPage;
+        </h2>
         @if(!Model.Any())
         {
             <h2 class="text-center"> No more recipies.If you want to add more click @Html.ActionLink("here","Create","Article")</h2>
