@@ -31,6 +31,8 @@ namespace Project.Models
 
         [Url]
         public string imgURL { get; set; }
+
+        
        
     }
 }
