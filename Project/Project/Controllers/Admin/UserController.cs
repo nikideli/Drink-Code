@@ -12,6 +12,7 @@ using System.Data.Entity;
 
 namespace Project.Controllers.Admin
 {
+    [Authorize(Roles ="Admin")]
     public class UserController : Controller
     {
 
@@ -51,6 +52,7 @@ namespace Project.Controllers.Admin
             };
         }
 
+        //Get: User/Edit
         public ActionResult Edit(string id)
         {
             if (id == null)
@@ -152,5 +154,56 @@ namespace Project.Controllers.Admin
         }
 
 
+
+        //Get User/Delete
+        public ActionResult Delete(string id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            using (var database = new ProjectDbContext())
+            {
+                var user = database.Users.Where(u => u.Id == id).First();
+
+                if (user == null)
+                {
+                    return HttpNotFound();
+                }
+
+                return View(user);
+            }
+        }
+
+
+        // POST: User/Delete
+
+        [HttpPost]
+        [ActionName("Delete")]
+        public ActionResult DeleteConfirmed(string id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            using (var database = new ProjectDbContext())
+            {
+                var user = database.Users.Where(u => u.Id.Equals(id)).First();
+
+                var userArticles = database.Articles.Where(a => a.Author.Id == user.Id);
+
+                foreach (var article in userArticles)
+                {
+                    database.Articles.Remove(article);
+                }
+
+                database.Users.Remove(user);
+                database.SaveChanges();
+
+                return RedirectToAction("List");
+            }
+        }
     }
 }
