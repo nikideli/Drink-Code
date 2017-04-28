@@ -11,7 +11,7 @@
 <div class="container">
     <div class="row">
         <h2 class="text-center">
-        @((currentUserQuerry != null && Model.Count !=0) ? "Drinks by " + Model.First().Author.FullName : "Our Recipes") -Page @ViewBag.CurrentPage;
+        @((currentUserQuerry != null && Model.Count !=0) ? "Drinks by " + Model.First().Author.FullName : "Our Recipes") -Page @ViewBag.CurrentPage
         </h2>
         @if(!Model.Any())
         {
